@@ -24,12 +24,14 @@ export default function CreateBlog() {
       if (image) formData.append('image', image);
 
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8081/api/posts', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const API = import.meta.env.VITE_API_URL;
+
+await axios.post(`${API}/posts`, formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: `Bearer ${token}`,
+  },
+});
 
       navigate('/'); 
     } catch (err) {

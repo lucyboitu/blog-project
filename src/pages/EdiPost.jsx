@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 export default function EditPost() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -9,9 +10,9 @@ export default function EditPost() {
   const token = localStorage.getItem('token');
   console.log("Using token:", token);
   
-  
+const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
-    axios.get(`http://localhost:8081/api/posts/${id}`)
+    axios.get(`${API}/posts/${id}`)
       .then(res => setForm({ title: res.data.title, subtitle: res.data.subtitle, content: res.data.content,image:res.data.image  }))
       .catch(err => console.error(err));
   }, [id]);
@@ -21,7 +22,7 @@ export default function EditPost() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8081/api/posts/${id}`, form, {
+      await axios.put(`${API}/posts/${id}`, form, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate(`/post/${id}`);

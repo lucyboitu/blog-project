@@ -10,8 +10,9 @@ export default function ViewBlog() {
     const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
 
+  const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
-    axios.get(`http://localhost:8081/api/posts/${id}`)
+    axios.get(`${API}/posts/${id}`)
       .then(res => setPost(res.data))
       .catch(err => console.error(err));
   }, [id]);
@@ -20,7 +21,7 @@ const handleDelete = async () => {
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`http://localhost:8081/api/posts/${id}`, {
+    await axios.delete(`${API}/posts/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

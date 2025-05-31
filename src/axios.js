@@ -5,7 +5,7 @@ export const createPost = async (postData) => {
 
   const token = localStorage.getItem('token'); 
   try {
-    const response = await axios.post('http://localhost:8081/api/posts', postData, {
+    const response = await axios.post('${API}/posts', postData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

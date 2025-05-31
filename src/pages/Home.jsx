@@ -8,12 +8,17 @@ import myImage from '../assets/images/side-image.png';
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
-
-  useEffect(() => {
-    axios.get('http://localhost:8081/api/posts')
-      .then(res => setPosts(res.data))
-      .catch(err => console.error(err));
-  }, []);
+const API = import.meta.env.VITE_API_URL;
+useEffect(() => {
+  axios.get(`${API}/posts`)
+    .then(res => {
+      console.log('API response:', res.data); // ✅ Add this
+      setPosts(res.data);
+    })
+    .catch(err => {
+      console.error('Fetch error:', err);
+    });
+}, []);
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
