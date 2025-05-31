@@ -15,7 +15,7 @@ export default function Signup() {
     e.preventDefault();
     setError('');
     try {
-      await axios.post('http://localhost:8081/api/auth/signup', form);
+     await axios.post(`${API}/auth/signup`, form);
       navigate('/login');  
     } catch (err) {
       setError(err.response?.data?.error || 'Signup failed');

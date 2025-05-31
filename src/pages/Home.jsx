@@ -9,16 +9,25 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
 
 const API = import.meta.env.VITE_API_URL;
-useEffect(() => {
-  axios.get(`${API}/posts`)
-    .then(res => {
-      console.log('API response:', res.data); // ✅ Add this
-      setPosts(res.data);
-    })
-    .catch(err => {
-      console.error('Fetch error:', err);
-    });
+uuseEffect(() => {
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get(`${API}/posts`);
+      if (Array.isArray(res.data)) {
+        setPosts(res.data);
+      } else {
+        // Retry after 1 second if response isn't ready
+        setTimeout(fetchPosts, 1000);
+      }
+    } catch (err) {
+      console.error("Failed to fetch posts:", err);
+      // Retry after delay in case the server is still waking up
+      setTimeout(fetchPosts, 1000);
+    }
+  };
+  fetchPosts();
 }, []);
+
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
