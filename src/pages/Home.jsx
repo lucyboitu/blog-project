@@ -9,7 +9,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
 
 const API = import.meta.env.VITE_API_URL;
-uuseEffect(() => {
+useEffect() => {
   const fetchPosts = async () => {
     try {
       const res = await axios.get(`${API}/posts`);
