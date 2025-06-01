@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../components/Form.css';
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 
 export default function Signup() {
   const [form, setForm] = useState({ username: '', email: '', password: '' });
@@ -15,7 +17,8 @@ export default function Signup() {
     e.preventDefault();
     setError('');
     try {
-     await axios.post(`${API}/auth/signup`, form);
+      // await axios.post(`${API}/auth/signup`, form); 
+      await axios.post('https://capstone-project-back-end.onrender.com/api/auth/signup', form)
       navigate('/login');  
     } catch (err) {
       setError(err.response?.data?.error || 'Signup failed');
