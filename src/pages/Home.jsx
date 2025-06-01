@@ -46,7 +46,7 @@ useEffect(() => {
           <li key={post._id}>
             <Link to={`/post/${post._id}`}>
               <h3>{post.title}</h3>
-              <p>{post.content}</p>
+              <p>{post.subtitle}</p>
             </Link>
           </li>
           
