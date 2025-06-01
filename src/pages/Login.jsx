@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import api from '../api/axios'; 
+// import api from '../api/axios'; 
+import axios from 'axios'; 
 import { Link, useNavigate } from 'react-router-dom';
 import '../components/Form.css';
 
@@ -15,8 +16,7 @@ export default function Login() {
   setError('');
   try {
 
- const res = await api.post('/auth/login', form);
-
+ const res = await axios.post('https://capstone-project-back-end.onrender.com/api/auth/login', form);
     localStorage.setItem('token', res.data.token);
     localStorage.setItem('user', JSON.stringify(res.data.user));
     const checkTokenAndNavigate = () => {
