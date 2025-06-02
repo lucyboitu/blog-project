@@ -6,6 +6,8 @@ const api = axios.create({
   baseURL: API,
   headers: {
     'Content-Type': 'application/json',
+     'Cache-Control': 'no-cache'
+    
   },
 });
 

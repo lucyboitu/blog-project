@@ -5,11 +5,13 @@ export const createPost = async (postData) => {
 
   const token = localStorage.getItem('token'); 
   try {
-    const response = await axios.post('${API}/posts', postData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+ const response = await axios.post(`${API}/posts`, postData, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache'
+  }
+});
     console.log('Post created:', response.data);
     return response.data;
   } catch (error) {
